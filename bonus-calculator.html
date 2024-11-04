@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bonus Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .calculator {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+            color: #555;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.2em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <h1>Bonus Calculator</h1>
+        
+        <div class="input-group">
+            <label for="bonusPercent">Bonus percent (e.g., 85 or 70):</label>
+            <input type="number" id="bonusPercent" placeholder="Enter bonus percent">
+        </div>
+        
+        <div class="input-group">
+            <label for="hoursAttended">Hours attended:</label>
+            <input type="number" id="hoursAttended" placeholder="Enter hours attended">
+        </div>
+        
+        <div class="input-group">
+            <label for="hoursSold">Hours sold:</label>
+            <input type="number" id="hoursSold" placeholder="Enter hours sold">
+        </div>
+        
+        <button onclick="calculateBonus()">Calculate Bonus</button>
+        
+        <p id="result">Your bonus: £</p>
+    </div>
+
+    <script>
+        function calculateBonus() {
+            // Retrieve the values from the input fields
+            const bonusPercent = parseFloat(document.getElementById("bonusPercent").value);
+            const hoursAttended = parseFloat(document.getElementById("hoursAttended").value);
+            const hoursSold = parseFloat(document.getElementById("hoursSold").value);
+            
+            // Check if inputs are valid numbers
+            if (isNaN(bonusPercent) || isNaN(hoursAttended) || isNaN(hoursSold)) {
+                document.getElementById("result").innerText = "Please enter valid numbers in all fields.";
+                return;
+            }
+
+            // Perform the calculation
+            const perc = bonusPercent / 100;
+            const result = (hoursSold - (hoursAttended * perc)) * 20;
+
+            // Display the result
+            document.getElementById("result").innerText = `Your bonus: £${result.toFixed(2)}`;
+        }
+    </script>
+
+</body>
+</html>
